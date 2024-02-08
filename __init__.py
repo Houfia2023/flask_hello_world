@@ -50,40 +50,5 @@ def Readfiche(post_id):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
     
-@app.route('/ajouter_client', methods=['GET', 'POST'])
-def ajouter_client():
-    form = NouveauClientForm()
-
-    if form.validate_on_submit():
-        # Connexion à la base de données
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
-
-        # Insertion des données du formulaire dans la table clients
-        cursor.execute('INSERT INTO clients (Nom) VALUES (?)', (form.Nom.data,))
-        
-        # Commit et fermeture de la connexion à la base de données
-        conn.commit()
-        conn.close()
-
-        return redirect(url_for('index'))  # Rediriger vers la page d'accueil ou une autre page après l'ajout
-
-    return render_template('ajouter_client.html', form=form)
-
-# Route pour afficher la page d'accueil ou la liste des clients
-@app.route('/')
-def index():
-    # Connexion à la base de données
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    # Sélection de tous les clients pour affichage
-    cursor.execute('SELECT * FROM clients')
-    clients = cursor.fetchall()
-
-    # Fermeture de la connexion à la base de données
-    conn.close()
-
-    return render_template('index.html', clients=clients)
 if __name__ == "__main__":
   app.run(debug=True)
