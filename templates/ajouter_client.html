@@ -1,1 +1,26 @@
+<!-- templates/ajouter_client.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un client</title>
+</head>
+<body>
+    <h1>Ajouter un nouveau client</h1>
+    <form method="POST" action="{{ url_for('ajouter_client') }}">
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.nom.label }} {{ form.nom(size=32) }}
+        </div>
+        <div>
+            {{ form.email.label }} {{ form.email(size=32) }}
+        </div>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
+</body>
+</html>
 
