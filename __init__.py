@@ -43,8 +43,7 @@ def ReadBDD():
 def Readfiche(post_id):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    # cursor.execute('SELECT * FROM clients WHERE id = ?', (post_id,))
-    cursor.execute('SELECT * FROM clients;')
+    cursor.execute('SELECT * FROM clients WHERE id = ?', (post_id,))
     data = cursor.fetchall()
     conn.close()
     
