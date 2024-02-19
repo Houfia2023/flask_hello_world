@@ -50,6 +50,17 @@ def Readfiche(post_id):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
+@app.route('/search/<nom_search>')
+def Search(nom_search):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM clients WHERE nom LIKE ?;", ('%' + nom_search +'%',))
+    data = cursor.fetchall()
+    conn.close()
+    
+    # Rendre le template HTML et transmettre les données
+    return render_template('read_data.html', data=data)
+    
 @app.route('/ajouter_client/', methods=['GET', 'POST'])
 def ajouter_client():
     form = NouveauClientForm()
