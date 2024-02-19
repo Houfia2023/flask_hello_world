@@ -61,7 +61,7 @@ def Search(nom_search):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
     
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/ajouter_client/', methods=['GET', 'POST'])
 def nouveau():
     if request.method == 'POST':
         # Récupérer les données du formulaire
